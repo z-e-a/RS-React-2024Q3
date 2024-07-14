@@ -2,11 +2,13 @@
 
 ### RSSchool React course repository of [@z-e-a](https://z-e-a.github.io/rsschool-cv/)
 
-#
+# К СОЖАЛЕНИЮ Я НЕ УСПЕЛ СДЕЛАТЬ ЗАДАЧУ... 😔 НО ЕСЛИ ПОЗВОЛИТЕ, ПОПЫТАЮСЬ НАВЕРСТАТЬ ЗА ВРЕМЯ ПРОВЕРКИ...  ЕЛСЛИ НЕТ - ТАК НЕТ... ВАШЕ ПРАВО... ЗАРАНЕЕ БЛАГОДАРЮ... 😘
+
 
 ### Tasks:
 
 - [Class components & Error boundary](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/class-components.md "https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/class-components.md")
+- [React Routing. Tests](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/routing.md "https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/routing.md")
 
 
 ## Instruction
