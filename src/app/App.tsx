@@ -1,63 +1,40 @@
-import React from "react";
+import { useCallback, useEffect, useState } from "react";
 
 // import styles from "./App.module.scss";
 import { IPeople } from "../SWApi";
 import Header from "../widgets/Header";
 import PeopleList from "../widgets/PeopleList";
+import { useLocalStorage } from "./useLocalStorage";
 
-interface IAppState {
-  searchText: string;
-  apiUrl: string;
-  people: IPeople[];
-}
+const App = () => {
+  const [searchText, setSearchText] = useLocalStorage("searchText", "");
 
-class App extends React.Component<object, IAppState> {
-  declare state: IAppState;
+  const [people, setPeople] = useState<IPeople[]>([]);
 
-  constructor(props: object) {
-    super(props);
-    const storedSearchText = localStorage.getItem("rss-react_searchText");
+  const search = useCallback(
+    (text: string) => {
+      const trimmedText = text.trim();
+      setSearchText(trimmedText);
+      fetch(`${import.meta.env.VITE_API_URL}?search=${trimmedText}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setPeople(data.results);
+        })
+        .catch((error) => console.log(error));
+    },
+    [setSearchText],
+  );
 
-    this.state = {
-      searchText: storedSearchText ?? "",
-      apiUrl: import.meta.env.VITE_API_URL,
-      people: [],
-    };
-    this.fetchData = this.fetchData.bind(this);
-    this.search = this.search.bind(this);
-  }
+  useEffect(() => {
+    search(searchText);
+  }, []);
 
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  async search(text: string) {
-    const trimmedText = text.trim();
-    await this.setState({ searchText: trimmedText });
-    localStorage.setItem("rss-react_searchText", trimmedText);
-    this.fetchData();
-  }
-
-  fetchData() {
-    fetch(`${this.state.apiUrl}?search=${this.state.searchText.trim()}`)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ people: data.results });
-      })
-      .catch((error) => console.log(error));
-  }
-
-  render() {
-    return (
-      <>
-        <Header
-          searchText={this.state.searchText}
-          searchCallback={this.search}
-        ></Header>
-        <PeopleList people={this.state.people}></PeopleList>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Header searchText={searchText} searchCallback={search}></Header>
+      <PeopleList people={people}></PeopleList>
+    </>
+  );
+};
 
 export default App;
