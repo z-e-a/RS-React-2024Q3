@@ -21,7 +21,7 @@ const Header = (props: IHeaderProps) => {
   }
 
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <SearchBox
         searchText={props.searchText}
         searchCallback={props.searchCallback}
@@ -30,7 +30,7 @@ const Header = (props: IHeaderProps) => {
         text={"Invoke error"}
         callback={onInvokeErrorClickHandler}
       ></Button>
-    </div>
+    </header>
   );
 };
 

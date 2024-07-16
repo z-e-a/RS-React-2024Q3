@@ -5,9 +5,18 @@ import { IPeople } from "../SWApi";
 import Header from "../widgets/Header";
 import PeopleList from "../widgets/PeopleList";
 import { useLocalStorage } from "./useLocalStorage";
+import { useSearchParams } from "react-router-dom";
 
-const App = () => {
+function App() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [searchText, setSearchText] = useLocalStorage("searchText", "");
+
+  const paramsSearchText = searchParams.get("text") ?? "";
+
+  if (paramsSearchText && paramsSearchText !== searchText) {
+    setSearchText(paramsSearchText);
+  }
 
   const [people, setPeople] = useState<IPeople[]>([]);
 
@@ -15,6 +24,11 @@ const App = () => {
     (text: string) => {
       const trimmedText = text.trim();
       setSearchText(trimmedText);
+      if (trimmedText) {
+        setSearchParams({ text: trimmedText });
+      } else {
+        setSearchParams({});
+      }
       fetch(`${import.meta.env.VITE_API_URL}?search=${trimmedText}`)
         .then((response) => response.json())
         .then((data) => {
@@ -22,7 +36,7 @@ const App = () => {
         })
         .catch((error) => console.log(error));
     },
-    [setSearchText],
+    [setSearchText]
   );
 
   useEffect(() => {
@@ -35,6 +49,6 @@ const App = () => {
       <PeopleList people={people}></PeopleList>
     </>
   );
-};
+}
 
 export default App;

@@ -27,7 +27,7 @@ const SearchBox = (props: ISearchBoxProps) => {
   return (
     <form onSubmit={onSearchFormSubmitHandler}>
       <input
-        type="text"
+        type="search"
         className={styles.searchInput}
         placeholder="type search text here..."
         value={searchText}
