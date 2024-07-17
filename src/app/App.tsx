@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 
-// import styles from "./App.module.scss";
 import { IPeople } from "../SWApi";
 import Header from "../widgets/Header";
 import PeopleList from "../widgets/PeopleList";
 import { useLocalStorage } from "./useLocalStorage";
-import { useSearchParams } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,7 +35,7 @@ function App() {
         })
         .catch((error) => console.log(error));
     },
-    [setSearchText]
+    [setSearchText],
   );
 
   useEffect(() => {
@@ -46,7 +45,9 @@ function App() {
   return (
     <>
       <Header searchText={searchText} searchCallback={search}></Header>
-      <PeopleList people={people}></PeopleList>
+      <PeopleList people={people}>
+        <Outlet />
+      </PeopleList>
     </>
   );
 }

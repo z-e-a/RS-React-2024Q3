@@ -9,6 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import NotFound from "./pages/NotFound";
+import PersonDetail, { peopleDetailLoader } from "./widgets/PersonDetail";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,13 @@ const router = createBrowserRouter([
     path: "search/*",
     element: <App />,
     errorElement: <NotFound />,
+    children: [
+      {
+        path: "detail",
+        element: <PersonDetail />,
+        loader: peopleDetailLoader,
+      },
+    ],
   },
   {
     path: "*",
