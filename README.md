@@ -2,8 +2,6 @@
 
 ### RSSchool React course repository of [@z-e-a](https://z-e-a.github.io/rsschool-cv/)
 
-# К СОЖАЛЕНИЮ Я НЕ УСПЕЛ СДЕЛАТЬ ЗАДАЧУ... 😔 НО ЕСЛИ ПОЗВОЛИТЕ, ПОПЫТАЮСЬ НАВЕРСТАТЬ ЗА ВРЕМЯ ПРОВЕРКИ...  ЕЛСЛИ НЕТ - ТАК НЕТ... ВАШЕ ПРАВО... ЗАРАНЕЕ БЛАГОДАРЮ... 😘
-
 
 ### Tasks:
 
