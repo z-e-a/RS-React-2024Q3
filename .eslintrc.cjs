@@ -21,6 +21,7 @@ module.exports = {
     "vite-env.d.ts",
     ".eslintrc.cjs",
     "vite.config.ts",
+    "vitest.config.ts",
     "SWApi.d.ts",
   ],
   parser: "@typescript-eslint/parser",
