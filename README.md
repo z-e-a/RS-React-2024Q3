@@ -7,6 +7,7 @@
 
 - [Class components & Error boundary](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/class-components.md "https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/class-components.md")
 - [React Routing. Tests](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/routing.md "https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/routing.md")
+- [Redux. Redux Toolkit, RTK Query. Context](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/redux.md "https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/redux.md")
 
 
 ## Instruction
