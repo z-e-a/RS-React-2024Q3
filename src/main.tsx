@@ -11,7 +11,7 @@ import {
 import NotFound from "./pages/NotFound";
 import PersonDetail, { peopleDetailLoader } from "./widgets/PersonDetail";
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <Navigate to="search" replace />,

@@ -1,3 +1,16 @@
+.link{
+  text-decoration: none;
+  color: inherit;
+
+  &:visited, &:hover, &:active, &:-webkit-any-link {
+    color: inherit;
+  }
+
+  &.light .card {
+    border-color:black;
+  }
+}
+
 .card {
   padding: 10px 15px;
   border: 1px dotted #e1e1e1;
@@ -6,11 +19,5 @@
   &._selected {
     border-color: #666eff;
     background-color:  #666eff4d;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  .card {
-    border: 1px dotted black;
   }
 }

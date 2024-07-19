@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-
+import styles from "./App.module.scss";
 import { IPeople } from "../SWApi";
 import Header from "../widgets/Header";
 import PeopleList from "../widgets/PeopleList";
 import Paginator from "../widgets/Paginator";
 import { useLocalStorage } from "./useLocalStorage";
 import { Outlet, useSearchParams } from "react-router-dom";
+import { ThemeContext } from "./Contexts";
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,6 +18,12 @@ function App() {
   if (paramsSearchText && paramsSearchText !== searchText) {
     setSearchText(paramsSearchText);
   }
+
+  const [theme, setTheme] = useState("dark");
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   const [people, setPeople] = useState<IPeople[]>([]);
   const [totalItemsCount, setTotalItemsCount] = useState<number>(-1);
@@ -48,7 +55,7 @@ function App() {
       if (trimmedText) {
         url.searchParams.set("search", trimmedText);
       }
-      console.log(currentPage);
+
       if (currentPage !== "1") {
         url.searchParams.set("page", String(currentPage));
       }
@@ -68,17 +75,27 @@ function App() {
   }, [currentPage]);
 
   return (
-    <>
-      <Header searchText={searchText} searchCallback={search}></Header>
-      <Paginator
-        currentPage={parseInt(currentPage, 1)}
-        pageSize={import.meta.env.VITE_PAGITAOR_PAGE_SIZE}
-        totalItemsCount={totalItemsCount}
-      />
-      <PeopleList people={people}>
-        <Outlet />
-      </PeopleList>
-    </>
+    <ThemeContext.Provider value={theme}>
+      <div
+        className={[styles.wrapper, theme == "light" ? styles.light : ""].join(
+          " ",
+        )}
+      >
+        <Header
+          searchText={searchText}
+          searchCallback={search}
+          toggleThemeCallback={toggleTheme}
+        ></Header>
+        <Paginator
+          currentPage={parseInt(currentPage, 1)}
+          pageSize={import.meta.env.VITE_PAGITAOR_PAGE_SIZE}
+          totalItemsCount={totalItemsCount}
+        />
+        <PeopleList people={people}>
+          <Outlet />
+        </PeopleList>
+      </div>
+    </ThemeContext.Provider>
   );
 }
 

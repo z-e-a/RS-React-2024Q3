@@ -1,8 +1,11 @@
 import styles from "./PersonDetail.module.scss";
 import { IPeople } from "../../../SWApi";
 import { Link, useLoaderData, useSearchParams } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../../../app/Contexts";
 
 const PeopleDetail = () => {
+  const theme = useContext(ThemeContext);
   const person: IPeople = useLoaderData() as IPeople;
   const [searchParams] = useSearchParams();
 
@@ -18,7 +21,12 @@ const PeopleDetail = () => {
   );
 
   return (
-    <div className={styles.detailContainer}>
+    <div
+      className={[
+        styles.detailContainer,
+        theme == "light" ? styles.light : "",
+      ].join(" ")}
+    >
       <h2 className={styles.detailCaption}>{person.name}</h2>
       <ul>
         {Object.keys(person).map((k) => {

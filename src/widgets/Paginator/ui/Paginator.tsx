@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styles from "./Paginator.module.scss";
 import { Link, useSearchParams } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../../../app/Contexts";
 
 interface IProps {
   currentPage: number;
@@ -9,6 +11,8 @@ interface IProps {
 }
 
 const Paginator = ({ currentPage, pageSize, totalItemsCount }: IProps) => {
+  const theme = useContext(ThemeContext);
+
   const [portionNumber, setPortionNumber] = useState<number>(1);
   const pagesCount: number = Math.ceil(totalItemsCount / pageSize);
   const pages: number[] = Array.from(
@@ -34,7 +38,12 @@ const Paginator = ({ currentPage, pageSize, totalItemsCount }: IProps) => {
   );
 
   return (
-    <div className={styles.prodPaginatorContrainer}>
+    <div
+      className={[
+        styles.prodPaginatorContrainer,
+        theme == "light" ? styles.light : "",
+      ].join(" ")}
+    >
       {portionNumber > 1 && (
         <button
           className={styles.pageButton}

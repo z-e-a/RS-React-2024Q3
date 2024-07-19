@@ -1,12 +1,15 @@
 import styles from "./PersonCard.module.scss";
 import { IPeople } from "../../../SWApi";
 import { Link, useSearchParams } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../../../app/Contexts";
 
 interface IPersonCardProps {
   person: IPeople;
 }
 
 const PersonCard = ({ person }: IPersonCardProps) => {
+  const theme = useContext(ThemeContext);
   const [searchParams] = useSearchParams();
   const isMatch = searchParams.get("name") == person.name;
   const id = person.url
@@ -35,7 +38,11 @@ const PersonCard = ({ person }: IPersonCardProps) => {
   }
 
   return (
-    <Link to={url.toString()} state={{ url: person.url }}>
+    <Link
+      to={url.toString()}
+      state={{ url: person.url }}
+      className={[styles.link, theme == "light" ? styles.light : ""].join(" ")}
+    >
       <article
         className={[styles.card, isMatch ? styles._selected : ""].join(" ")}
       >
