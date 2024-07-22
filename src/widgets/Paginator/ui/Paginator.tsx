@@ -1,17 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styles from "./Paginator.module.scss";
 import { Link, useSearchParams } from "react-router-dom";
-import { useContext } from "react";
 import { ThemeContext } from "../../../app/Contexts";
+import {
+  IPeopleViewState,
+  setCurrentPage,
+} from "../../../entities/people/model/peopleViewSlice";
+import { RootStateType, useAppSelector } from "../../../app/store";
+import { useDispatch } from "react-redux";
 
-interface IProps {
-  currentPage: number;
-  pageSize: number;
-  totalItemsCount: number;
-}
-
-const Paginator = ({ currentPage, pageSize, totalItemsCount }: IProps) => {
+const Paginator = () => {
   const theme = useContext(ThemeContext);
+
+  const dispatch = useDispatch();
+  const { totalItemsCount, currentPage }: IPeopleViewState = useAppSelector<
+    RootStateType,
+    IPeopleViewState
+  >((store): IPeopleViewState => store.peopleView);
+  const pageSize = import.meta.env.VITE_PAGITAOR_PAGE_SIZE;
 
   const [portionNumber, setPortionNumber] = useState<number>(1);
   const pagesCount: number = Math.ceil(totalItemsCount / pageSize);
@@ -72,6 +78,10 @@ const Paginator = ({ currentPage, pageSize, totalItemsCount }: IProps) => {
                 p === currentPage ? styles.currentPageButton : "",
               ].join(" ")}
               key={p}
+              onClick={(e: React.SyntheticEvent<HTMLAnchorElement>) => {
+                e.preventDefault();
+                dispatch(setCurrentPage({ currentPage: p }));
+              }}
             >
               {p}
             </Link>

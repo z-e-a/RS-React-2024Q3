@@ -7,8 +7,6 @@ import { ThemeContext } from "../../../app/Contexts";
 import Toggle from "../../../shared/Toggle";
 
 interface IHeaderProps {
-  searchText: string;
-  searchCallback: (text: string) => void;
   toggleThemeCallback: () => void;
 }
 
@@ -30,10 +28,7 @@ const Header = (props: IHeaderProps) => {
         " ",
       )}
     >
-      <SearchBox
-        searchText={props.searchText}
-        searchCallback={props.searchCallback}
-      ></SearchBox>
+      <SearchBox />
       <Button
         text={"Invoke error"}
         callback={onInvokeErrorClickHandler}

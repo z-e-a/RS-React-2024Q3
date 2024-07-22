@@ -16,7 +16,6 @@ const Button = ({
   submit = false,
 }: IButtonProps) => {
   const theme = useContext(ThemeContext);
-  console.log(theme);
 
   return (
     <button

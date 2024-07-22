@@ -8,7 +8,7 @@ export const peopleDetailLoader: LoaderFunction<unknown> = async ({
 
   if (url) {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/${url.searchParams.get("id")}`,
+      `${import.meta.env.VITE_API_URL}/people/${url.searchParams.get("id")}`,
     );
     const person: IPeople = await response.json();
 

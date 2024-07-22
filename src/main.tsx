@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import PersonDetail, { peopleDetailLoader } from "./widgets/PersonDetail";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 export const router = createBrowserRouter([
   {
@@ -38,7 +40,9 @@ export const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </ErrorBoundary>
   </React.StrictMode>,
 );
