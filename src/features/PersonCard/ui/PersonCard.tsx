@@ -80,7 +80,7 @@ const PersonCard = ({ person }: IPersonCardProps) => {
         select
         <input
           type="checkbox"
-          checked={selectedPeople.includes(person.name)}
+          checked={selectedPeople.some((p) => p.name === person.name)}
           onChange={() => {
             dispatch(togglePeopleSelection({ people: person }));
           }}

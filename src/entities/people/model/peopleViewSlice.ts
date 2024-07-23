@@ -5,7 +5,7 @@ import { IPeople } from "../../../SWApi";
 export interface IPeopleViewState {
   currentPage: number;
   totalItemsCount: number;
-  selectedPeople: string[];
+  selectedPeople: IPeople[];
   searchText: string;
 }
 
@@ -43,11 +43,13 @@ export const peopleViewSlice = createSlice({
       state,
       action: PayloadAction<{ people: IPeople }>,
     ) => {
-      if (!state.selectedPeople.includes(action.payload.people.name)) {
-        state.selectedPeople.push(action.payload.people.name);
+      if (
+        !state.selectedPeople.some((p) => p.name === action.payload.people.name)
+      ) {
+        state.selectedPeople.push(action.payload.people);
       } else {
         state.selectedPeople = state.selectedPeople.filter(
-          (p) => p !== action.payload.people.name,
+          (p) => p.name !== action.payload.people.name,
         );
       }
     },
