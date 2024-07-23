@@ -3,10 +3,12 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { peopleReducer } from "../entities/people";
 import { peopleViewReducer } from "../entities/people/model/peopleViewSlice";
 import { swApi } from "./swApi";
+import { personReducer } from "../entities/person";
 
 const rootReducer = combineReducers({
   people: peopleReducer,
   peopleView: peopleViewReducer,
+  person: personReducer,
   [swApi.reducerPath]: swApi.reducer,
 });
 

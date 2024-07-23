@@ -1,13 +1,18 @@
 import styles from "./PersonDetail.module.scss";
 import { IPeople } from "../../../SWApi";
-import { Link, useLoaderData, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../../../app/Contexts";
+import { usePersonQuery } from "../../../app/swApi";
+import Loader from "../../../shared/Loader";
 
 const PeopleDetail = () => {
   const theme = useContext(ThemeContext);
-  const person: IPeople = useLoaderData() as IPeople;
   const [searchParams] = useSearchParams();
+  const id = searchParams.get("id") ?? "0";
+  const { data, isLoading } = usePersonQuery({ id });
+
+  const person: IPeople = data!;
 
   const redusedSearchParams: URLSearchParams = new URLSearchParams();
   searchParams.forEach((v, k) => {
@@ -19,6 +24,10 @@ const PeopleDetail = () => {
     `search?${redusedSearchParams.toString()}`,
     window.location.origin,
   );
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div

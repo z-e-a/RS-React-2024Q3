@@ -22,14 +22,18 @@ export const swApi = createApi({
     people: builder.mutation<IPeopleResponse, IPeopleRequest>({
       query: (params) => ({
         url: "people",
-        // method: "POST",
         params: {
           search: params.searchText,
           page: params.page,
         },
       }),
     }),
+    person: builder.query<IPeople, { id: string }>({
+      query: (params) => ({
+        url: `people/${params.id}`,
+      }),
+    }),
   }),
 });
 
-export const { usePeopleMutation } = swApi;
+export const { usePeopleMutation, usePersonQuery } = swApi;
