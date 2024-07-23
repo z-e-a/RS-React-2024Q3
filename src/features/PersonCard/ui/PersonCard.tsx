@@ -50,8 +50,6 @@ const PersonCard = ({ person }: IPersonCardProps) => {
     IPeopleViewState
   >((store): IPeopleViewState => store.peopleView);
 
-  console.log(selectedPeople.includes(person.name));
-
   return (
     <div className={styles.cardContainer}>
       <Link

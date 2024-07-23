@@ -17,6 +17,7 @@ import { IPeopleResponse, usePeopleMutation } from "./swApi";
 import Loader from "../shared/Loader";
 import { IPeople } from "../SWApi";
 import { setPeople } from "../entities/people";
+import Flyout from "../widgets/Flyout";
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -108,6 +109,7 @@ function App() {
         <PeopleList people={people}>
           <Outlet />
         </PeopleList>
+        <Flyout />
       </div>
     </ThemeContext.Provider>
   );
