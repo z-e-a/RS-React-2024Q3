@@ -3,6 +3,12 @@ import { IPeople } from "../../../SWApi";
 import { Link, useSearchParams } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../../../app/Contexts";
+import { useDispatch } from "react-redux";
+import { RootStateType, useAppSelector } from "../../../app/store";
+import {
+  IPeopleViewState,
+  togglePeopleSelection,
+} from "../../../entities/people/model/peopleViewSlice";
 
 interface IPersonCardProps {
   person: IPeople;
@@ -37,29 +43,52 @@ const PersonCard = ({ person }: IPersonCardProps) => {
     url.searchParams.set("id", id);
   }
 
+  const dispatch = useDispatch();
+
+  const { selectedPeople }: IPeopleViewState = useAppSelector<
+    RootStateType,
+    IPeopleViewState
+  >((store): IPeopleViewState => store.peopleView);
+
+  console.log(selectedPeople.includes(person.name));
+
   return (
-    <Link
-      to={url.toString()}
-      state={{ url: person.url }}
-      className={[styles.link, theme == "light" ? styles.light : ""].join(" ")}
-    >
-      <article
-        className={[styles.card, isMatch ? styles._selected : ""].join(" ")}
+    <div className={styles.cardContainer}>
+      <Link
+        to={url.toString()}
+        state={{ url: person.url }}
+        className={[styles.link, theme == "light" ? styles.light : ""].join(
+          " ",
+        )}
       >
-        <h3>
-          <span>Name: </span>
-          <span>{person.name}</span>
-        </h3>
-        <p>
-          <span>Year of birth: </span>
-          <span>{person.birth_year}</span>
-        </p>
-        <p>
-          <span>Eye color: </span>
-          <span>{person.eye_color}</span>
-        </p>
-      </article>
-    </Link>
+        <article
+          className={[styles.card, isMatch ? styles._selected : ""].join(" ")}
+        >
+          <h3>
+            <span>Name: </span>
+            <span>{person.name}</span>
+          </h3>
+          <p>
+            <span>Year of birth: </span>
+            <span>{person.birth_year}</span>
+          </p>
+          <p>
+            <span>Eye color: </span>
+            <span>{person.eye_color}</span>
+          </p>
+        </article>
+      </Link>
+      <label className={styles.selectLabel}>
+        select
+        <input
+          type="checkbox"
+          checked={selectedPeople.includes(person.name)}
+          onChange={() => {
+            dispatch(togglePeopleSelection({ people: person }));
+          }}
+        />
+      </label>
+    </div>
   );
 };
 

@@ -43,7 +43,13 @@ export const peopleViewSlice = createSlice({
       state,
       action: PayloadAction<{ people: IPeople }>,
     ) => {
-      state.selectedPeople.push(action.payload.people.name);
+      if (!state.selectedPeople.includes(action.payload.people.name)) {
+        state.selectedPeople.push(action.payload.people.name);
+      } else {
+        state.selectedPeople = state.selectedPeople.filter(
+          (p) => p !== action.payload.people.name,
+        );
+      }
     },
     unselectAllPeople: (state) => {
       state.selectedPeople = [];
