@@ -67,13 +67,6 @@ module.exports = {
         SwitchCase: 1,
       },
     ],
-    "@typescript-eslint/indent": [
-      "warn",
-      2,
-      {
-        SwitchCase: 1,
-      },
-    ],
     "import/prefer-default-export": "off",
     "no-param-reassign": [
       "error",
