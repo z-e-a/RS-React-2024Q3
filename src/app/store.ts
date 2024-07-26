@@ -5,7 +5,7 @@ import { peopleViewReducer } from "../entities/people/model/peopleViewSlice";
 import { swApi } from "./swApi";
 import { personReducer } from "../entities/person";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   people: peopleReducer,
   peopleView: peopleViewReducer,
   person: personReducer,

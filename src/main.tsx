@@ -9,7 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import NotFound from "./pages/NotFound";
-import PersonDetail, { peopleDetailLoader } from "./widgets/PersonDetail";
+import PersonDetail from "./widgets/PersonDetail";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 
@@ -27,7 +27,6 @@ export const router = createBrowserRouter([
       {
         path: "detail",
         element: <PersonDetail />,
-        loader: peopleDetailLoader,
       },
     ],
   },

@@ -49,6 +49,7 @@ const Paginator = () => {
         styles.prodPaginatorContrainer,
         theme == "light" ? styles.light : "",
       ].join(" ")}
+      data-testid="container"
     >
       {portionNumber > 1 && (
         <button

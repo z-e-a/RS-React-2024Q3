@@ -25,6 +25,10 @@
   font-weight: bold;
 }
 
+.fieldValue {
+  overflow: ellipsis;
+}
+
 .closeBtn {
   position: absolute;
   top: 3px;

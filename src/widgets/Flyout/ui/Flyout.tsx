@@ -16,24 +16,26 @@ const Flyout = () => {
   >((store): IPeopleViewState => store.peopleView);
 
   const download = () => {
-    const content = [
-      "data:text/csv;charset=utf-8,",
-      Object.keys(selectedPeople[0]).join(","),
-      ...selectedPeople.map((p) =>
-        Object.keys(p)
-          .map((k) => (p as unknown as Record<string, string>)[k])
-          .join(","),
-      ),
-    ].join("\n");
+    if (selectedPeople?.length) {
+      const content = [
+        "data:text/csv;charset=utf-8,",
+        Object.keys(selectedPeople[0]).join(","),
+        ...selectedPeople.map((p) =>
+          Object.keys(p)
+            .map((k) => (p as unknown as Record<string, string>)[k])
+            .join(","),
+        ),
+      ].join("\n");
 
-    const encodedUri = encodeURI(content);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `${selectedPeople.length}_people.csv`);
-    document.body.appendChild(link);
+      const encodedUri = encodeURI(content);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `${selectedPeople.length}_people.csv`);
+      document.body.appendChild(link);
 
-    link.click();
+      link.click();
+    }
   };
 
   return (

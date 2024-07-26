@@ -35,6 +35,7 @@ const PeopleDetail = () => {
         styles.detailContainer,
         theme == "light" ? styles.light : "",
       ].join(" ")}
+      data-testid="container"
     >
       <h2 className={styles.detailCaption}>{person.name}</h2>
       <ul>
@@ -42,7 +43,9 @@ const PeopleDetail = () => {
           return (
             <li className={styles.detailEntry} key={k}>
               <span className={styles.fieldName}>{k}: </span>
-              <span>{(person as unknown as Record<string, string>)[k]}</span>
+              <span className={styles.fieldValue}>
+                {(person as unknown as Record<string, string>)[k]}
+              </span>
             </li>
           );
         })}
