@@ -21,6 +21,7 @@ module.exports = {
     "vite-env.d.ts",
     ".eslintrc.cjs",
     "vite.config.ts",
+    "vitest.config.ts",
     "SWApi.d.ts",
   ],
   parser: "@typescript-eslint/parser",
@@ -60,13 +61,6 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "max-len": ["warn", { code: 120 }],
     indent: [
-      "warn",
-      2,
-      {
-        SwitchCase: 1,
-      },
-    ],
-    "@typescript-eslint/indent": [
       "warn",
       2,
       {
