@@ -29,16 +29,16 @@ export const getServerSideProps = (async (context) => {
 export default function Search(props: { count: number; results: IPeople[] }) {
   const pagingState = useContext(PagingContext);
 
-  if (pagingState?.setTotalsCount) {
-    pagingState.setTotalsCount(props.count);
-  }
-
   const searchParams = useSearchParams();
   let searchText = searchParams.get("text") || "";
 
   const router = useRouter();
 
   useEffect(() => {
+    if (pagingState?.setTotalsCount) {
+      pagingState.setTotalsCount(props.count);
+    }
+
     if (searchText) {
       window.localStorage.setItem(
         `${process.env.NEXT_PUBLIC_APP_PREFIX}searchText`,
